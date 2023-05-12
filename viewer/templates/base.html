@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="sidebar">
+		<header>
+			<h1>WhatToCook</h1>
+		</header>
+		<nav>
+			<ul class="nav-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="http://127.0.0.1:8000/admin">Admin</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
