@@ -16,7 +16,7 @@ class Ingredient(Model):
     calories_per_100g = IntegerField(validators=[MinValueValidator(1)], blank=False)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.category})"
 
 
 class MealCategory(Model):
