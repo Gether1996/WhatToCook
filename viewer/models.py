@@ -19,8 +19,16 @@ class Ingredient(Model):
         return f"{self.name} ({self.category})"
 
 
-class MealCategory(Model):
+class MainMealCategory(Model):
     name = CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class SecondaryMealCategory(Model):
+    name = CharField(max_length=50)
+    main_categories = ManyToManyField(MainMealCategory, related_name='secondary_categories')
 
     def __str__(self):
         return self.name
@@ -28,7 +36,7 @@ class MealCategory(Model):
 
 class Meal(Model):
     name = CharField(max_length=50)
-    category = ForeignKey(MealCategory, on_delete=CASCADE)
+    category = ForeignKey(SecondaryMealCategory, on_delete=CASCADE)
     ingredients = ManyToManyField(Ingredient)
     description = TextField()
     recipe_text = TextField()
