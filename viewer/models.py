@@ -39,7 +39,6 @@ class Meal(Model):
     category = ManyToManyField(SecondaryMealCategory)
     ingredients = ManyToManyField(Ingredient)
     description = TextField()
-    recipe_text = TextField()
     picture = ImageField(upload_to='images/', blank=True)
 
     def __str__(self):
