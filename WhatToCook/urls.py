@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from viewer.views import homepage
 from django.urls import path, include
-from viewer.views import logout_view, registration, main_meal_categories
+from viewer.views import logout_view, registration, main_meal_categories, secondary_meal_categories, meals_in_sec_category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('registration/', registration, name='registration'),
     path('accounts/profile/', homepage, name='profile'),
-    path('main_meal_categories/', main_meal_categories, name='main_meal_categories')
+    path('main_meal_categories/', main_meal_categories, name='main_meal_categories'),
+    path('secondary_meal_categories/<int:main_category_id>/', secondary_meal_categories, name='secondary_meal_categories'),
+    path('filtered_meals/<int:secondary_category_id>/', meals_in_sec_category, name='meals_in_sec_category'),
 ]

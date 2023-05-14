@@ -27,7 +27,7 @@ nav ul {
 
 nav li {
   margin-bottom: 10px;
-  position: relative; /* added */
+  position: relative;
 }
 
 nav a {

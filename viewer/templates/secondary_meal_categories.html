@@ -7,8 +7,8 @@
 <body>
 
 
-    {% for category in main_categories %}
-        <a href="{% url 'secondary_meal_categories' category.id %}">{{ category.name }}</a>
+    {% for category in secondary_categories %}
+        <a href="{% url 'meals_in_sec_category' category.id %}">{{ category.name }}</a>
     {% endfor %}
 
 
