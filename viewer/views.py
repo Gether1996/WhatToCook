@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from viewer.forms import SignUpForm
+from viewer.models import MainMealCategory
 
 
 def registration(request):
@@ -23,3 +24,9 @@ def homepage(request):
     context = {
     }
     return render(request, 'homepage.html', context)
+
+
+def main_meal_categories(request):
+    main_categories = MainMealCategory.objects.all()
+    return render(request, 'main_meal_categories.html', {'main_categories': main_categories})
+
