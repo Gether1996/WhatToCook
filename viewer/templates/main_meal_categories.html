@@ -7,10 +7,11 @@
 <body>
 
 
-    {% for category in main_categories %}
-        <a href="{% url 'secondary_meal_categories' category.id %}">{{ category.name }}</a>
-    {% endfor %}
-
+{% for category in main_categories %}
+    <a href="{% url 'secondary_meal_categories' category.id %}">
+        <img src="{% static category.picture %}" alt="{{ category.name }}" width="200" height="200">
+    </a>
+{% endfor %}
 
 </body>
 {% endblock %}

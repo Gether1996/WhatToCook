@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class IngredientCategory(Model):
     name = CharField(max_length=50)
+    picture = ImageField(upload_to='viewer/static/images/', blank=True)
 
     def __str__(self):
         return self.name
@@ -21,6 +22,7 @@ class Ingredient(Model):
 
 class MainMealCategory(Model):
     name = CharField(max_length=50)
+    picture = ImageField(upload_to='viewer/static/images/', blank=True)
 
     def __str__(self):
         return self.name
@@ -29,6 +31,7 @@ class MainMealCategory(Model):
 class SecondaryMealCategory(Model):
     name = CharField(max_length=50)
     main_category = ForeignKey(MainMealCategory, on_delete=CASCADE)
+    picture = ImageField(upload_to='viewer/static/images/', blank=True)
 
     def __str__(self):
         return f"{self.name} ({self.main_category})"
@@ -39,7 +42,7 @@ class Meal(Model):
     category = ManyToManyField(SecondaryMealCategory)
     ingredients = ManyToManyField(Ingredient)
     description = TextField()
-    picture = ImageField(upload_to='images/', blank=True)
+    picture = ImageField(upload_to='viewer/static/images/', blank=True)
 
     def __str__(self):
         return self.name

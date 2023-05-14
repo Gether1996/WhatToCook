@@ -7,9 +7,13 @@
 <body>
 
 
-    {% for category in secondary_categories %}
-        <a href="{% url 'meals_in_sec_category' category.id %}">{{ category.name }}</a>
-    {% endfor %}
+{% for category in secondary_categories %}
+    <div>
+        <a href="{% url 'meals_in_sec_category' category.id %}" style="text-decoration: none;">
+            <p style="color: black; margin: 20; font-size: 20px;">{{ category.name }}</p>
+        </a>
+    </div>
+{% endfor %}
 
 
 </body>
