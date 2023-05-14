@@ -6,23 +6,27 @@
 </head>
 <body>
 	<div class="sidebar">
-		<header>
-			<h1>WhatToCook</h1>
-		</header>
-		<nav>
-			<ul class="nav-links">
-				<li><a href="http://127.0.0.1:8000">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="http://127.0.0.1:8000/admin">Admin</a></li>
-				{% if request.user.is_authenticated %}
-				  <li><a href="{% url 'logout' %}">Logout</a></li>
-				{% else %}
-				  <li><a href="{% url 'login' %}">Login</a></li>
-				  <li><a href="{% url 'registration' %}">Sign-up</a></li>
-				{% endif %}
-			</ul>
-		</nav>
+	  <header>
+		<h1>WhatToCook</h1>
+	  </header>
+	  <nav>
+		<ul class="nav-links">
+		  <li><a href="http://127.0.0.1:8000">Home</a></li>
+		  <li>
+			<a href="#">Meal Categories</a>
+		  </li>
+		  <li>
+			<a href="#">Ingredient Categories</a>
+		  </li>
+		  <li><a href="http://127.0.0.1:8000/admin">Admin</a></li>
+		  {% if request.user.is_authenticated %}
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		  {% else %}
+			<li><a href="{% url 'login' %}">Login</a></li>
+			<li><a href="{% url 'registration' %}">Sign-up</a></li>
+		  {% endif %}
+		</ul>
+	  </nav>
 	</div>
 
 	<div class="content">
