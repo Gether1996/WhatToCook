@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from viewer.forms import SignUpForm
 from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient
-import random
+
 
 
 def registration(request):
@@ -57,3 +57,8 @@ def ingredients(request, category_id):
     for ingredient in ingredients:
         ingredient.color_r, ingredient.color_g, ingredient.color_b = 60, 60, 60
     return render(request, 'ingredients.html', {'ingredients': ingredients})
+
+
+def meal_detail(request, meal_id):
+    meal = get_object_or_404(Meal, id=meal_id)
+    return render(request, 'meal_detail.html', {'meal': meal})

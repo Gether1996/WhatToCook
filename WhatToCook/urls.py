@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from viewer.views import homepage
 from django.urls import path, include
-from viewer.views import logout_view, registration, main_meal_categories, secondary_meal_categories, filtered_meals, ingredient_categories, ingredients
+from viewer.views import logout_view, registration, main_meal_categories, secondary_meal_categories, filtered_meals, ingredient_categories, ingredients, meal_detail
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -34,4 +34,5 @@ urlpatterns = [
     path('filtered_meals/category/<int:secondary_category_id>/', filtered_meals, name='filtered_meals_by_category'),
     path('ingredient_categories/', ingredient_categories, name='ingredient_categories'),
     path('ingredients/<int:category_id>/', ingredients, name='ingredients'),
+    path('meal_detail/<int:meal_id>/', meal_detail, name='meal_detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

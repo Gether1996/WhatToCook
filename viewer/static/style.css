@@ -102,3 +102,18 @@ nav a:hover {
   padding: 5px;
   font-weight: bold;
 }
+
+.meal-detail {
+    position: relative;
+}
+
+.meal-info {
+    margin-right: 300px;  /* Adjust the margin as needed */
+}
+
+.meal-image {
+    position: absolute;
+    top: 50px;
+    right: 600px;
+    width: 500px;  /* Adjust the width as needed */
+}
