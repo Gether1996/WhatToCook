@@ -8,11 +8,17 @@
 
 
 {% for category in secondary_categories %}
+{% if category.picture %}
+    <a href="{% url 'meals_in_sec_category' category.id %}">
+        <img src="{{ MEDIA_URL }}{{ category.picture.url }}" width="500" height="333">
+    </a>
+{% else %}
     <div>
         <a href="{% url 'meals_in_sec_category' category.id %}" style="text-decoration: none;">
             <p style="color: black; margin: 20; font-size: 20px;">{{ category.name }}</p>
         </a>
     </div>
+{% endif %}
 {% endfor %}
 
 
