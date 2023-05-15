@@ -8,9 +8,7 @@
 
 
 {% for category in main_categories %}
-    <a href="{% url 'secondary_meal_categories' category.id %}">
-        <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
-    </a>
+    <a href="{% url 'secondary_meal_categories' category.id %}"><img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}"></a>
 {% endfor %}
 
 </body>
