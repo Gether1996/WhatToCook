@@ -5,13 +5,15 @@
 
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
-
-
-{% for category in ingredient_category %}
-    <a href="{% url 'ingredients' category.id %}">
-        <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
-    </a>
-{% endfor %}
-
+    <div class="ingredient-grid">
+      {% for category in ingredient_category %}
+        <div class="ingredient-item">
+          <a href="{% url 'ingredients' category.id %}">
+            <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
+            <div class="category-name">{{ category.name }}</div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
 </body>
 {% endblock %}

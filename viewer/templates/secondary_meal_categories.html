@@ -6,12 +6,16 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
 
-
+<div class="ingredient-grid">
 {% for category in secondary_categories %}
+    <div class="ingredient-item">
     <a href="{% url 'filtered_meals_by_category' secondary_category_id=category.id %}">
         <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
+        <div class="category-name">{{ category.name }}</div>
     </a>
+        </div>
 {% endfor %}
+    </div>
 
 
 </body>
