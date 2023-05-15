@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from viewer.forms import SignUpForm
 from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient
+import random
 
 
 def registration(request):
@@ -53,4 +54,8 @@ def ingredient_categories(request):
 
 def ingredients(request, category_id):
     ingredients = Ingredient.objects.filter(category__id=category_id)
+    for ingredient in ingredients:
+        ingredient.color_r = 60
+        ingredient.color_g = 60
+        ingredient.color_b = 60
     return render(request, 'ingredients.html', {'ingredients': ingredients})

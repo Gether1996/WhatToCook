@@ -9,7 +9,7 @@
 
 {% for category in secondary_categories %}
     <a href="{% url 'filtered_meals_by_category' secondary_category_id=category.id %}">
-        <img src="{{ MEDIA_URL }}{{ category.picture.url }}" width="500" height="333">
+        <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
     </a>
 {% endfor %}
 

@@ -47,13 +47,36 @@ nav a:hover {
   padding: 20px;
 }
 
-.ingredient-list {
-    list-style-type: none;
-    padding: 0;
-    font-size: 30px;
+
+.ingredient-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ingredient-item {
+  width: 250px;
+  height: 120px;
+  margin: 50px;
+  border-radius: 10px;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ingredient-link {
-    color: black;
-    text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
 }
+
+.images {
+  width: 400px;
+  height: 266px;
+  margin: 20px;
+  border-radius: 20px;
+}
+

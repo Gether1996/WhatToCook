@@ -7,15 +7,15 @@
 <body>
 
 
-<ul class="ingredient-list">
-    {% for ingredient in ingredients %}
-        <li>
-            <a class="ingredient-link" href="{% url 'filtered_meals_by_ingredient' ingredient_id=ingredient.id %}">
-                {{ ingredient.name }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="ingredient-grid">
+  {% for ingredient in ingredients %}
+    <div class="ingredient-item" style="background-color: rgb({{ ingredient.color_r }}, {{ ingredient.color_g }}, {{ ingredient.color_b }});">
+      <a class="ingredient-link" href="{% url 'filtered_meals_by_ingredient' ingredient_id=ingredient.id %}">
+        {{ ingredient.name }}
+      </a>
+    </div>
+  {% endfor %}
+</div>
 
 </body>
 {% endblock %}

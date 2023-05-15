@@ -9,7 +9,7 @@
 
 {% for category in ingredient_category %}
     <a href="{% url 'ingredients' category.id %}">
-        <img src="{{ MEDIA_URL }}{{ category.picture.url }}" width="500" height="333">
+        <img class="images" src="{{ MEDIA_URL }}{{ category.picture.url }}">
     </a>
 {% endfor %}
 
