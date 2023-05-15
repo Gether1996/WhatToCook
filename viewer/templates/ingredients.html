@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<body>
+
+
+<ul class="ingredient-list">
+    {% for ingredient in ingredients %}
+        <li>
+            <a class="ingredient-link" href="{% url 'filtered_meals_by_ingredient' ingredient_id=ingredient.id %}">
+                {{ ingredient.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+{% endblock %}

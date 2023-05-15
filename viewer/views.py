@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from viewer.forms import SignUpForm
-from viewer.models import MainMealCategory, SecondaryMealCategory, Meal
+from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient
 
 
 def registration(request):
@@ -36,6 +36,21 @@ def secondary_meal_categories(request, main_category_id):
     return render(request, 'secondary_meal_categories.html', {'secondary_categories': secondary_categories})
 
 
-def meals_in_sec_category(request, secondary_category_id):
-    meals = Meal.objects.filter(category=secondary_category_id)
+def filtered_meals(request, ingredient_id=None, secondary_category_id=None):
+    if ingredient_id:
+        meals = Meal.objects.filter(ingredients=ingredient_id)
+    elif secondary_category_id:
+        meals = Meal.objects.filter(category=secondary_category_id)
+    else:
+        meals = Meal.objects.all()
     return render(request, 'filtered_meals.html', {'meals': meals})
+
+
+def ingredient_categories(request):
+    ingredient_category = IngredientCategory.objects.all()
+    return render(request, 'ingredient_categories.html', {'ingredient_category': ingredient_category})
+
+
+def ingredients(request, category_id):
+    ingredients = Ingredient.objects.filter(category__id=category_id)
+    return render(request, 'ingredients.html', {'ingredients': ingredients})
