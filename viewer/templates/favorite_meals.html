@@ -4,8 +4,20 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <body>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <p style="font-size: 20px; margin-left: 0px;"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 {% if favorite_meals %}
+<h1 style="margin-left: 40px;">Favorite meals</h1>
+
 <div class="ingredient-grid">
     {% for meal in favorite_meals %}
     <div class="ingredient-item">
@@ -13,6 +25,13 @@
             <img class="images" src="{{ MEDIA_URL }}{{ meal.meal.picture.url }}">
             <div class="category-name">{{ meal.meal.name }}</div>
         </a>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <a href="{% url 'delete_favorite_meal' favorite_meal_id=meal.id %}" class="trash-icon">
+                <i style="color: black;" class="fa fa-trash"></i>
+            </a>
+        </form>
     </div>
 {% endfor %}
 {% else %}

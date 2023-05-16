@@ -74,7 +74,17 @@ def create_favorite_meal(request, meal_id):
     else:
         favorite_meal = FavoriteMeal.objects.create(user=request.user, meal=meal)
         messages.success(request, 'Meal added to favorites!')
-    return render(request, 'filtered_meals.html')
+    favorite_meals = FavoriteMeal.objects.filter(user__id=request.user.id)
+    return render(request, 'favorite_meals.html', {'favorite_meals': favorite_meals})
+
+
+@login_required
+def delete_favorite_meal(request, favorite_meal_id):
+    favorite_meal = get_object_or_404(FavoriteMeal, id=favorite_meal_id)
+    favorite_meal.delete()
+    messages.warning(request, 'Successfully deleted!')
+    favorite_meals = FavoriteMeal.objects.filter(user__id=request.user.id)
+    return render(request, 'favorite_meals.html', {'favorite_meals': favorite_meals})
 
 
 @login_required
