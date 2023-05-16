@@ -9,9 +9,9 @@
 <div class="ingredient-grid">
     {% for meal in favorite_meals %}
     <div class="ingredient-item">
-        <a href="{% url 'meal_detail' meal_id=meal.id %}">
-            <img class="images" src="{{ MEDIA_URL }}{{ meal.picture.url }}">
-            <div class="category-name">{{ meal.name }}</div>
+        <a href="{% url 'meal_detail' meal_id=meal.meal.id %}">
+            <img class="images" src="{{ MEDIA_URL }}{{ meal.meal.picture.url }}">
+            <div class="category-name">{{ meal.meal.name }}</div>
         </a>
     </div>
 {% endfor %}

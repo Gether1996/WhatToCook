@@ -69,10 +69,12 @@ def meal_detail(request, meal_id):
 @login_required
 def create_favorite_meal(request, meal_id):
     meal = get_object_or_404(Meal, id=meal_id)
-    favorite_meal = FavoriteMeal.objects.create(user=request.user, meal=meal)
-    messages.success(request, 'Meal added to favorites!')
-    redirect_url = request.GET.get('next', reverse('homepage'))
-    return render(redirect_url)
+    if FavoriteMeal.objects.filter(user=request.user, meal=meal).exists():
+        messages.warning(request, 'This meal is already in your favorites!')
+    else:
+        favorite_meal = FavoriteMeal.objects.create(user=request.user, meal=meal)
+        messages.success(request, 'Meal added to favorites!')
+    return render(request, 'filtered_meals.html')
 
 
 @login_required
