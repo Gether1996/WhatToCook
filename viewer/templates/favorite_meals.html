@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
-
+{% if favorite_meals %}
 <div class="ingredient-grid">
     {% for meal in favorite_meals %}
     <div class="ingredient-item">
@@ -15,6 +15,9 @@
         </a>
     </div>
 {% endfor %}
+{% else %}
+<h1>You don't have any favorite meals yet.</h1>
+{% endif %}
 </div>
 
 </body>

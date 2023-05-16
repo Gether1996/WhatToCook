@@ -25,7 +25,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                 <a href="{% url 'create_favorite_meal' meal_id=meal.id %}">
-                    <i class="fa fa-heart"></i>
+                    <i style="color: red;" class="fa fa-heart"></i>
                 </a>
             </form>
         </a>
