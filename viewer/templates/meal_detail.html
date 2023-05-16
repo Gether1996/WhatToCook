@@ -5,16 +5,20 @@
 
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
-    <div class="meal-detail">
-        <div class="meal-info">
-            <h1>{{ meal.name }}</h1>
-            <h3>{{ meal.description }}</h3>
-            <h4>Ingredients:</h4>
-                {% for ingredient in meal.ingredients.all %}
-                    <li>{{ ingredient.name }}</li>
-                {% endfor %}
+    <div class="container">
+        <div class="meal-detail">
+            <div class="meal-info">
+                <h1>{{ meal.name }}</h1>
+                <h3>{{ meal.description }}</h3>
+                <h4>Ingredients:</h4>
+                <ul>
+                    {% for ingredient in meal.ingredients.all %}
+                        <li>{{ ingredient.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <img class="meal-image" src="{{ MEDIA_URL }}{{ meal.picture.url }}">
         </div>
-        <img class="meal-image" src="{{ MEDIA_URL }}{{ meal.picture.url }}">
     </div>
 </body>
 {% endblock %}
