@@ -32,6 +32,7 @@ urlpatterns = [
     path('accounts/profile/', homepage, name='profile'),
     path('main_meal_categories/', main_meal_categories, name='main_meal_categories'),
     path('secondary_meal_categories/<int:main_category_id>/', secondary_meal_categories, name='secondary_meal_categories'),
+    path('all_meals/', filtered_meals, name='all_meals'),
     path('filtered_meals/ingredient/<int:ingredient_id>/', filtered_meals, name='filtered_meals_by_ingredient'),
     path('filtered_meals/category/<int:secondary_category_id>/', filtered_meals, name='filtered_meals_by_category'),
     path('ingredient_categories/', ingredient_categories, name='ingredient_categories'),

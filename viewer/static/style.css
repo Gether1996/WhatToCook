@@ -126,3 +126,14 @@ nav a:hover {
   height: 500px;
   margin: 60px;
 }
+
+.image-container {
+  position: relative;
+}
+
+.trash-icon {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}

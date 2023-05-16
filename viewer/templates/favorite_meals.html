@@ -21,19 +21,18 @@
 <div class="ingredient-grid">
     {% for meal in favorite_meals %}
     <div class="ingredient-item">
+        <div class="image-container">
         <a href="{% url 'meal_detail' meal_id=meal.meal.id %}">
-            <img class="images" src="{{ MEDIA_URL }}{{ meal.meal.picture.url }}">
+                <img class="images" src="{{ MEDIA_URL }}{{ meal.meal.picture.url }}">
+                <a href="{% url 'delete_favorite_meal' favorite_meal_id=meal.id %}" class="trash-icon">
+                    <i style="color: black;" class="fa fa-trash"></i>
+                </a>
+            </div>
             <div class="category-name">{{ meal.meal.name }}</div>
         </a>
-        <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.path }}">
-            <a href="{% url 'delete_favorite_meal' favorite_meal_id=meal.id %}" class="trash-icon">
-                <i style="color: black;" class="fa fa-trash"></i>
-            </a>
-        </form>
-    </div>
-{% endfor %}
+
+</div>
+    {% endfor %}
 {% else %}
 <h1>You don't have any favorite meals yet.</h1>
 {% endif %}

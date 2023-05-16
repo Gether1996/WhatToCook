@@ -10,19 +10,21 @@
 <div class="ingredient-grid">
     {% for meal in meals %}
     <div class="ingredient-item">
+        <div class="image-container">
         <a href="{% url 'meal_detail' meal_id=meal.id %}">
-            <img class="images" src="{{ MEDIA_URL }}{{ meal.picture.url }}">
-            <div class="category-name">{{ meal.name }}</div>
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.path }}">
-                <a href="{% url 'create_favorite_meal' meal_id=meal.id %}">
+                <img class="images" src="{{ MEDIA_URL }}{{ meal.picture.url }}">
+                <a href="{% url 'create_favorite_meal' meal_id=meal.id %}" class="trash-icon">
                     <i style="color: red;" class="fa fa-heart"></i>
                 </a>
-            </form>
+            </div>
+            <div class="category-name">{{ meal.name }}</div>
         </a>
-    </div>
-{% endfor %}
+
+</div>
+    {% endfor %}
+
+
+
 </div>
 
 </body>
