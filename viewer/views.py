@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from viewer.forms import SignUpForm
-from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient
-
+from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient, FavoriteMeal
+from django.contrib import messages
+from django.urls import reverse
 
 
 def registration(request):
@@ -62,3 +64,19 @@ def ingredients(request, category_id):
 def meal_detail(request, meal_id):
     meal = get_object_or_404(Meal, id=meal_id)
     return render(request, 'meal_detail.html', {'meal': meal})
+
+
+@login_required
+def create_favorite_meal(request, meal_id):
+    meal = get_object_or_404(Meal, id=meal_id)
+    favorite_meal = FavoriteMeal.objects.create(user=request.user, meal=meal)
+    messages.success(request, 'Meal added to favorites!')
+    redirect_url = request.GET.get('next', reverse('homepage'))
+    return render(redirect_url)
+
+
+@login_required
+def favorite_meals_for_user(request):
+    favorite_meals = FavoriteMeal.objects.filter(user__id=request.user.id)
+    return render(request, 'favorite_meals.html', {'favorite_meals': favorite_meals})
+

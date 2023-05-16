@@ -19,6 +19,9 @@ class Ingredient(Model):
     def __str__(self):
         return f"{self.name} ({self.category})"
 
+    class Meta:
+        ordering = ['category']
+
 
 class MainMealCategory(Model):
     name = CharField(max_length=50)
@@ -46,6 +49,9 @@ class Meal(Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
 
 class FavoriteMeal(Model):
