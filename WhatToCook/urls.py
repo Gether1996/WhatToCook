@@ -42,4 +42,5 @@ urlpatterns = [
     path('create_favorite_meal/<int:meal_id>/', create_favorite_meal, name='create_favorite_meal'),
     path('delete_favorite_meal/<int:favorite_meal_id>/', delete_favorite_meal, name='delete_favorite_meal'),
     path('random_meal/', lambda request: filtered_meals(request, get_random_meal=True), name="random_meal"),
+    path('random_favorite/', lambda request: filtered_meals(request, random_favorite=True), name="random_favorite"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

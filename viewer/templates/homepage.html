@@ -11,15 +11,24 @@
     <title>Title</title>
 </head>
 <body>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <p style="font-size: 20px; margin-left: 0px;"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+  </ul>
+{% endif %}
+
   {% if user.is_authenticated %}
     <h1 style="margin-left: 25px">Hello, {{ user.username }}!</h1>
   {% else %}
     <h1 style="margin-left: 25px">Hello, Guest!</h1>
   {% endif %}
 
-  <div>
-    <a href="{% url 'random_meal' %}"><img class="images" src="/viewer/static/images/random_meal_background.jpg"></a>
-  </div>
+      <a href="{% url 'random_meal' %}"><img class="images" src="/viewer/static/images/random_meal_background.jpg"></a>
+      <a href="{% url 'random_favorite' %}"><img class="images" src="/viewer/static/images/random_favorite.jpg"></a>
+
 </body>
 
 

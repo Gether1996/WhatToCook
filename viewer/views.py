@@ -40,13 +40,19 @@ def secondary_meal_categories(request, main_category_id):
     return render(request, 'secondary_meal_categories.html', {'secondary_categories': secondary_categories, 'category': category})
 
 
-def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_random_meal=False):
+def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_random_meal=False, random_favorite=False):
+    category = None
     if ingredient_id:
         meals = Meal.objects.filter(ingredients=ingredient_id)
+        ingredient_category = Ingredient.objects.get(id=ingredient_id)
+        category = ingredient_category.name if ingredient_category else None
     elif secondary_category_id:
         meals = Meal.objects.filter(category=secondary_category_id)
+        secondary_category = SecondaryMealCategory.objects.get(id=secondary_category_id)
+        category = secondary_category.name if secondary_category else None
     else:
         meals = Meal.objects.all()
+        category = None
 
     if get_random_meal:
         excluded_categories = ["Hot beverages", "Cold beverages", "Alcoholic beverages"]
@@ -54,7 +60,18 @@ def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_
         random_meal = random.choice(meals)
         return render(request, 'filtered_meals.html', {'meals': [random_meal]})
 
-    return render(request, 'filtered_meals.html', {'meals': meals})
+    if random_favorite:
+        logged_in_user = request.user
+        favorite_meals = FavoriteMeal.objects.filter(user=logged_in_user)
+        if favorite_meals:
+            random_favorite_meal = random.choice(favorite_meals)
+            random_meal = random_favorite_meal.meal
+            return render(request, 'filtered_meals.html', {'meals': [random_meal]})
+        else:
+            messages.warning(request, "You don't have any favorite meals!")
+            return render(request, 'homepage.html', {'meals': meals})
+
+    return render(request, 'filtered_meals.html', {'meals': meals, 'category': category})
 
 
 def ingredient_categories(request):

@@ -7,7 +7,15 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <body>
 
-<h1 style="margin-left: 25px;">{{ category.name }}</h1>
+{% if category %}
+<h1 style="margin-left: 25px;">{{ category }}</h1>
+{% elif request.path == '/random_meal/' %}
+<h1 style="margin-left: 25px;">Try this!</h1>
+{% elif request.path == '/random_favorite/' %}
+<h1 style="margin-left: 25px;">One of your favorites</h1>
+{% else %}
+<h1 style="margin-left: 25px;">All meals</h1>
+{% endif %}
 
 <div class="ingredient-grid">
     {% for meal in meals %}
