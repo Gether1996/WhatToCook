@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
 
-
+<h1 style="margin-left: 50px;">{{ category.name }}</h1>
 <div class="ingredient-grid">
   {% for ingredient in ingredients %}
     <div class="ingredient-item" style="background-color: rgb({{ ingredient.color_r }}, {{ ingredient.color_g }}, {{ ingredient.color_b }}); margin: 50px;">

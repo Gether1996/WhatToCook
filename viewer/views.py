@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from viewer.forms import SignUpForm
 from viewer.models import MainMealCategory, SecondaryMealCategory, Meal, IngredientCategory, Ingredient, FavoriteMeal
 from django.contrib import messages
-from django.urls import reverse
+import random
 
 
 def registration(request):
@@ -36,16 +36,24 @@ def main_meal_categories(request):
 
 def secondary_meal_categories(request, main_category_id):
     secondary_categories = SecondaryMealCategory.objects.filter(main_category=main_category_id)
-    return render(request, 'secondary_meal_categories.html', {'secondary_categories': secondary_categories})
+    category = MainMealCategory.objects.get(id=main_category_id)
+    return render(request, 'secondary_meal_categories.html', {'secondary_categories': secondary_categories, 'category': category})
 
 
-def filtered_meals(request, ingredient_id=None, secondary_category_id=None):
+def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_random_meal=False):
     if ingredient_id:
         meals = Meal.objects.filter(ingredients=ingredient_id)
     elif secondary_category_id:
         meals = Meal.objects.filter(category=secondary_category_id)
     else:
         meals = Meal.objects.all()
+
+    if get_random_meal:
+        excluded_categories = ["Hot beverages", "Cold beverages", "Alcoholic beverages"]
+        meals = meals.exclude(category__name__in=excluded_categories)
+        random_meal = random.choice(meals)
+        return render(request, 'filtered_meals.html', {'meals': [random_meal]})
+
     return render(request, 'filtered_meals.html', {'meals': meals})
 
 
@@ -56,9 +64,10 @@ def ingredient_categories(request):
 
 def ingredients(request, category_id):
     ingredients = Ingredient.objects.filter(category__id=category_id)
+    category = IngredientCategory.objects.get(id=category_id)
     for ingredient in ingredients:
         ingredient.color_r, ingredient.color_g, ingredient.color_b = 60, 60, 60
-    return render(request, 'ingredients.html', {'ingredients': ingredients})
+    return render(request, 'ingredients.html', {'ingredients': ingredients, 'category': category})
 
 
 def meal_detail(request, meal_id):
