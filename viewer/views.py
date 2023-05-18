@@ -60,7 +60,7 @@ def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_
         random_meal = random.choice(meals)
         return render(request, 'filtered_meals.html', {'meals': [random_meal]})
 
-    if random_favorite:
+    if random_favorite and request.user.is_authenticated:
         logged_in_user = request.user
         favorite_meals = FavoriteMeal.objects.filter(user=logged_in_user)
         if favorite_meals:
@@ -70,6 +70,10 @@ def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_
         else:
             messages.warning(request, "You don't have any favorite meals!")
             return render(request, 'homepage.html', {'meals': meals})
+
+    if random_favorite and not request.user.is_authenticated:
+        messages.warning(request, "Sorry, you need to be logged in to access random favorites.")
+        return render(request, 'homepage.html', {'meals': meals})
 
     return render(request, 'filtered_meals.html', {'meals': meals, 'category': category})
 

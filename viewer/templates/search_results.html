@@ -29,31 +29,31 @@
 </style>
 
   <body>
-    <h1>Search Results for "{{ query }}"</h1>
+    <h1>Search results for "{{ query }}"</h1>
 
     {% if categories %}
-      <h2>Categories:</h2>
+      <h2 style="color: salmon;">Categories:</h2>
       <ul>
         {% for category in categories %}
-          <li><a href="{% url 'filtered_meals_by_category' secondary_category_id=category.id %}">{{ category.name }}</a></li>
+          <li><a style="font-size: 18px;" href="{% url 'filtered_meals_by_category' secondary_category_id=category.id %}">{{ category.name }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
     {% if meals %}
-      <h2>Meals:</h2>
+      <h2 style="color: salmon;">Meals:</h2>
       <ul>
         {% for meal in meals %}
-          <li><a href="{% url 'meal_detail' meal_id=meal.id %}">{{ meal.name }}</a></li>
+          <li><a style="font-size: 18px;" href="{% url 'meal_detail' meal_id=meal.id %}">{{ meal.name }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
     {% if ingredients %}
-      <h2>Meals containing:</h2>
+      <h2 style="color: salmon;">Meals containing:</h2>
       <ul>
         {% for ingredient in ingredients %}
-          <li><a href="{% url 'filtered_meals_by_ingredient' ingredient_id=ingredient.id %}">{{ ingredient.name }}</a></li>
+          <li><a style="font-size: 18px;" href="{% url 'filtered_meals_by_ingredient' ingredient_id=ingredient.id %}">{{ ingredient.name }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}

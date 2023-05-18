@@ -17,6 +17,7 @@
 <h1 style="margin-left: 25px;">All meals</h1>
 {% endif %}
 
+{% if meals %}
 <div class="ingredient-grid">
     {% for meal in meals %}
     <div class="ingredient-item">
@@ -31,10 +32,10 @@
 
 </div>
     {% endfor %}
-
-
-
 </div>
+{% else %}
+<p style="margin-left: 25px; font-size: 20px;">Sorry, nothing currently in here.</p>
+{% endif %}
 
 </body>
 {% endblock %}
