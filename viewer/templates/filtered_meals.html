@@ -8,7 +8,7 @@
 <body>
 
 {% if category %}
-<h1 style="margin-left: 25px;">{{ category }}</h1>
+<h1 style="margin-left: 25px;">{{ category.name }}</h1>
 {% elif request.path == '/random_meal/' %}
 <h1 style="margin-left: 25px;">Try this!</h1>
 {% elif request.path == '/random_favorite/' %}

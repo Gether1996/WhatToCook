@@ -10,7 +10,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
+
 
 {% if messages %}
   <ul class="messages">
@@ -25,6 +27,11 @@
   {% else %}
     <h1 style="margin-left: 25px">Hello, Guest!</h1>
   {% endif %}
+
+<form style="margin-left: 20px;" method="GET" action="{% url 'search_results' %}">
+  <input style="font-size: 18px; border-radius: 6px;" type="text" name="query" placeholder="Search for anything">
+  <button style="background-color: salmon; font-size: 18px; border-radius: 6px;" type="submit">Search</button>
+</form>
 
       <a href="{% url 'random_meal' %}"><img class="images" src="/viewer/static/images/random_meal_background.jpg"></a>
       <a href="{% url 'random_favorite' %}"><img class="images" src="/viewer/static/images/random_favorite.jpg"></a>

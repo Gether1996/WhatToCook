@@ -19,7 +19,7 @@ from viewer.views import homepage
 from django.urls import path, include
 from viewer.views import logout_view, registration, main_meal_categories, secondary_meal_categories, \
     filtered_meals, ingredient_categories, ingredients, meal_detail, favorite_meals_for_user, create_favorite_meal, \
-    delete_favorite_meal
+    delete_favorite_meal, search_results
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -43,4 +43,5 @@ urlpatterns = [
     path('delete_favorite_meal/<int:favorite_meal_id>/', delete_favorite_meal, name='delete_favorite_meal'),
     path('random_meal/', lambda request: filtered_meals(request, get_random_meal=True), name="random_meal"),
     path('random_favorite/', lambda request: filtered_meals(request, random_favorite=True), name="random_favorite"),
+    path('search/', search_results, name='search_results'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

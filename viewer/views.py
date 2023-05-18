@@ -45,11 +45,11 @@ def filtered_meals(request, ingredient_id=None, secondary_category_id=None, get_
     if ingredient_id:
         meals = Meal.objects.filter(ingredients=ingredient_id)
         ingredient_category = Ingredient.objects.get(id=ingredient_id)
-        category = ingredient_category.name if ingredient_category else None
+        category = ingredient_category if ingredient_category else None
     elif secondary_category_id:
         meals = Meal.objects.filter(category=secondary_category_id)
         secondary_category = SecondaryMealCategory.objects.get(id=secondary_category_id)
-        category = secondary_category.name if secondary_category else None
+        category = secondary_category if secondary_category else None
     else:
         meals = Meal.objects.all()
         category = None
@@ -118,3 +118,19 @@ def favorite_meals_for_user(request):
     favorite_meals = FavoriteMeal.objects.filter(user__id=request.user.id)
     return render(request, 'favorite_meals.html', {'favorite_meals': favorite_meals})
 
+
+def search_results(request):
+    query = request.GET.get('query')
+
+    categories = SecondaryMealCategory.objects.filter(name__icontains=query)
+    meals = Meal.objects.filter(name__icontains=query)
+    ingredients = Ingredient.objects.filter(name__icontains=query)
+
+    context = {
+        'query': query,
+        'categories': categories,
+        'meals': meals,
+        'ingredients': ingredients,
+    }
+
+    return render(request, 'search_results.html', context)
