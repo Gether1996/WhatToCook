@@ -84,10 +84,8 @@ def ingredient_categories(request):
 
 
 def ingredients(request, category_id):
-    ingredients = Ingredient.objects.filter(category__id=category_id)
+    ingredients = Ingredient.objects.filter(category__id=category_id).order_by("name")
     category = IngredientCategory.objects.get(id=category_id)
-    for ingredient in ingredients:
-        ingredient.color_r, ingredient.color_g, ingredient.color_b = 60, 60, 60
     return render(request, 'ingredients.html', {'ingredients': ingredients, 'category': category})
 
 
